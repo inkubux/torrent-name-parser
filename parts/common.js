@@ -8,26 +8,28 @@ var core = require('../core');
  */
 var patterns = {
   season: /([Ss]?([0-9]{1,2}))[Eex]|([Ss]([0-9]{1,2}))/,
-  episode: /([Eex]([0-9]{2})(?:[^0-9]|$))/,
+  episode: /([Eex]([0-9]{2,4}(?:[abc])?)(?:[^0-9]|$))/,
   year: /([\[\(]?((?:19[0-9]|20[01])[0-9])[\]\)]?)/,
   resolution: /(([0-9]{3,4}(?:p|i)))[^M]/,
-  quality: /hdtv|bluray|(?:b[dr]|dvd|hd|tv)rip|web-?(?:dl|rip)|dvd/i,
-  codec: /dvix|mpeg[0-9]|divx|xvid|(?:x|h)[-\. ]?26(?:4|5)|avc|hevc/i,
-  audio: /MP3|DD5\.?1|Dual[\- ]Audio|LiNE|DTS|AAC(?:\.?2\.0)?|AC3(?:\.5\.1)?/,
+  quality: /hdtv|bluray|(?:b[dr]|dvd|hd|tv|webhd|web)rip|web-?(?:dl|rip)|dvd|bd|ituneshd|itunes|ts/i,
+  codec: /dvix|mpeg[0-9]|divx|xvid|(?:x|h)[-\. ]?26(?:4|5)|avc|hevc|vp(?:8|9)/i,
+  audio: /MP3|FLAC|DD5\.?1|Dual[\- ]Audio|LiNE|DTS|AAC(?:\.?2\.0)?|AC3(?:\.5\.1)?/,
   group: /(- ?([^-]+))$/,
   region: /R[0-9]/,
+  doku: /DOKU/i,
   extended: /EXTENDED/,
   hardcoded: /HC/,
   proper: /PROPER/,
   repack: /REPACK/,
   container: /MKV|AVI|MP4|mkv|avi|mp4/,
   website: /^(\[ ?([^\]]+?) ?\])/,
-  language: /(?:TRUE)?FR(?:ENCH)?|EN(?:G(?:LISH)?)?|VOST(?:(F(?:R)?)|A)?|MULTI(?:Lang|Truefrench|\-VF2)?|SUBFRENCH/gi
+  language: /(?:TRUE)?FR(?:ENCH)?|DE(?:UTSCH)?|GERMAN(?:(?:\.|\-|\ )?SUBBED)?|EN(?:G(?:LISH)?)?|VOST(?:(F(?:R)?)|A)?|MULTI(?:Lang|Truefrench|\-VF2)?|SUBFRENCH/gi
 };
 var types = {
   season: 'integer',
   episode: 'integer',
   year: 'integer',
+  doku: 'boolean',
   extended: 'boolean',
   hardcoded: 'boolean',
   proper: 'boolean',
